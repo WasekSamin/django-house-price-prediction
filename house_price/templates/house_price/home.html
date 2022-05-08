@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% comment %}Custom css + js{% endcomment %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<script src="{% static 'js/home.js' %}" defer></script>
+
+<div id="home__mainDiv" class="w-full h-screen flex items-center justify-center">
+    <div id="home__cardDiv" class="w-[70%] bg-slate-200 shadow-lg rounded-lg flex flex-col items-center text-sm">
+        <div class="flex justify-center">
+            <img src="{% static 'images/house.jpg' %}" class="w-[7rem] h-[7rem] object-contain" alt="">
+        </div>
+        <div class="mb-5 text-center">
+            <h3 class="font-semibold text-base lg:text-xl">House Price Prediction</h3>
+        </div>
+
+        {% include "house_price/predict_form.html" %}
+    </div>
+</div>
+
+{% endblock %}
