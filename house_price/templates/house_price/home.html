@@ -8,13 +8,29 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <script src="{% static 'js/home.js' %}" defer></script>
 
-<div id="home__mainDiv" class="w-full h-screen flex items-center justify-center">
+<div id="home__mainDiv" class="max-w-screen-2xl mx-auto w-full h-full flex flex-col items-center justify-center mt-10">
     <div id="home__cardDiv" class="w-[70%] bg-slate-200 shadow-lg rounded-lg flex flex-col items-center text-sm">
         <div class="flex justify-center">
             <img src="{% static 'images/house.jpg' %}" class="w-[7rem] h-[7rem] object-contain" alt="">
         </div>
         <div class="mb-5 text-center">
-            <h3 class="font-semibold text-base lg:text-xl">House Price Prediction</h3>
+            <h3 class="font-semibold text-base lg:text-xl text-slate-800">House Price Prediction</h3>
+        </div>
+
+        <div id="error__msgDiv" class="hidden">
+            <p class="text-sm text-rose-500 font-semibold">Error Message!</p>
+        </div>
+
+        <div id="house__predictionResultModal" class="max-w-screen-2xl mx-auto w-full h-full fixed top-0 left-0">
+            <div class="px-5 py-16 w-[80%] lg:w-1/2 rounded-lg shadow-lg absolute top-[50%] left-[50%] z-50 bg-slate-200 flex flex-col items-center gap-y-5">
+                <div class="absolute right-1.5 top-1.5">
+                    <section id="close__predictionModal" class="cursor-pointer hover:text-rose-500 text-slate-600">
+                        <span class="iconify text-xl" data-icon="ep:circle-close"></span>
+                    </section>
+                </div>
+                <h5 class="text-slate-800 font-semibold text-base lg:text-xl">Predicted Result</h5>
+                <p class="text-slate-600">House Predicted Price is <span class="font-semibold" id="predicted__result"></span></p>
+            </div>
         </div>
 
         {% include "house_price/predict_form.html" %}

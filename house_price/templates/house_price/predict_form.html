@@ -1,32 +1,30 @@
-<form id="home__form" class="flex flex-col justify-between h-full w-full px-5 mt-5">
+<form method="POST" action="{% url 'house_price:house-price-predict' %}" id="home__form" class="flex flex-col justify-between h-full w-full px-5 mt-5">
+    {% csrf_token %}
     <div class="grid grid-cols-3 gap-x-5 gap-y-3">
-        <div class="flex flex-1 relative z-0 w-full mb-5 group">
-            <input type="number" id="house_area" name="house_area" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
-            <label for="house_area" class="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Area of the House <span class="text-slate-500">(Square Feet)</span></label>
-            <p class="text-rose-500 hidden username__errorMsg">Username field is required!</p>
+        <div class="flex flex-col items-start justify-start flex-1 relative z-0 w-full mb-5 group">
+            <input type="number" id="house_area" name="house_area" class="text-slate-700 block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
+            <label for="house_area" class="text-slate-800 peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Area of the House <span class="text-slate-500">(Square Feet)</span></label>
         </div>
         <div class="flex flex-1 relative z-0 w-full mb-5 group">
-            <input type="text" id="total_rooms" name="total_rooms" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
-            <label for="total_rooms" class="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Number of Rooms</label>
-            <p class="text-rose-500 hidden username__errorMsg">Username field is required!</p>
+            <input type="text" id="total_rooms" name="total_rooms" class="text-slate-700 block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
+            <label for="total_rooms" class="text-slate-800 peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Number of Rooms</label>
         </div>
         <div class="mb-3">
-            <select class="form-select appearance-none
+            <select id="house_style" class="form-select appearance-none
               block
               w-full
-              px-3
               py-2.5
               text-sm
               font-normal
-              text-gray-700
+              text-slate-800
               bg-transparent bg-clip-padding bg-no-repeat
               border-b-2 border-solid border-gray-300
               rounded
               transition
               ease-in-out
               m-0
-              focus:text-gray-700 focus:bg-white focus:border-indigo-400 focus:outline-none" aria-label="Default select example">
-                <option selected>Select House Style</option>
+              focus:text-slate-700 focus:bg-white focus:border-indigo-400 focus:outline-none custom__select" aria-label="Default select example" required>
+                <option selected value="">Select House Style</option>
                 <option value="1Story">1Story</option>
                 <option value="2Story">2Story</option>
                 <option value="1.5Fin">1.5Fin</option>
@@ -39,82 +37,73 @@
         </div>
 
         <div class="flex flex-1 relative z-0 w-full mb-5 group">
-            <input type="text" id="total_bathrooms" name="total_bathrooms" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
-            <label for="total_bathrooms" class="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Number of Bathrooms</label>
-            <p class="text-rose-500 hidden username__errorMsg">Username field is required!</p>
+            <input type="text" id="total_bathrooms" name="total_bathrooms" class="text-slate-700 block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
+            <label for="total_bathrooms" class="text-slate-800 peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Number of Bathrooms</label>
         </div>
         <div class="flex flex-1 relative z-0 w-full mb-5 group">
-            <input type="number" id="total_kitchens" name="total_kitchens" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
-            <label for="total_kitchens" class="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Number of Kitchens</label>
-            <p class="text-rose-500 hidden username__errorMsg">Username field is required!</p>
+            <input type="number" id="total_kitchens" name="total_kitchens" class="text-slate-700 block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
+            <label for="total_kitchens" class="text-slate-800 peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Number of Kitchens</label>
         </div>
         <div class="flex flex-1 relative z-0 w-full mb-5 group">
-            <input type="text" id="total_fireplaces" name="total_fireplaces" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
-            <label for="total_fireplaces" class="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Number of Fireplaces</label>
-            <p class="text-rose-500 hidden username__errorMsg">Username field is required!</p>
+            <input type="text" id="total_fireplaces" name="total_fireplaces" class="text-slate-700 block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
+            <label for="total_fireplaces" class="text-slate-800 peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Number of Fireplaces</label>
         </div>
 
         <div class="flex flex-1 relative z-0 w-full mb-5 group">
-            <input type="text" id="garage_area" name="garage_area" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
-            <label for="garage_area" class="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Area of the Garage</label>
-            <p class="text-rose-500 hidden username__errorMsg">Username field is required!</p>
+            <input type="text" id="garage_area" name="garage_area" class="text-slate-700 block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
+            <label for="garage_area" class="text-slate-800 peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Area of the Garage</label>
         </div>
         <div class="flex flex-1 relative z-0 w-full mb-5 group">
-            <input type="text" id="car_capacity" name="car_capacity" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
-            <label for="car_capacity" class="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Capacity in the Garage</label>
-            <p class="text-rose-500 hidden username__errorMsg">Username field is required!</p>
+            <input type="text" id="car_capacity" name="car_capacity" class="text-slate-700 block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
+            <label for="car_capacity" class="text-slate-800 peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Capacity in the Garage</label>
         </div>
         <div class="flex flex-1 relative z-0 w-full mb-5 group">
-            <input type="number" id="basement_area" name="basement_area" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
-            <label for="basement_area" class="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Area of the Basement <span class="text-slate-500">(Square Feet)</span></label>
-            <p class="absolute top-[120%] left-0 text-xs font-medium text-slate-500">Type 0 if does not have any basement</p>
-            <p class="text-rose-500 hidden username__errorMsg">Username field is required!</p>
+            <input type="text" id="basement_area" name="basement_area" class="text-slate-700 block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
+            <label for="basement_area" class="text-slate-800 peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Area of the Basement <span class="text-slate-500">(Square Feet)</span></label>
+            <p class="absolute top-[120%] left-0 text-xs font-medium text-slate-600">Type 0 if does not have any basement</p>
         </div>
 
-        <div class="flex flex-1 relative z-0 w-full my-5 group">
-            <input type="text" id="total_rooms" name="total_rooms" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
-            <label for="total_rooms" class="peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Area of the Pool <span class="text-slate-500">(Square Feet)</span></label>
-            <p class="absolute top-[120%] left-0 text-xs font-medium text-slate-500">Type 0 if does not have any pool</p>
-            <p class="text-rose-500 hidden username__errorMsg">Username field is required!</p>
+        <div class="flex flex-1 relative z-0 w-full my-5 group pool__areaDiv">
+            <input type="text" id="pool_area" name="pool_area" class="text-slate-700 block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-400 peer" placeholder=" " required />
+            <label for="pool_area" class="text-slate-800 peer-focus:font-medium absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Area of the Pool <span class="text-slate-500">(Square Feet)</span></label>
+            <p class="absolute top-[120%] left-0 text-xs font-medium text-slate-600">Type 0 if does not have any pool</p>
         </div>
         <div class="mb-3 mt-5">
-            <select class="form-select appearance-none
+            <select id="central_air" class="form-select appearance-none
               block
               w-full
-              px-3
               py-2.5
               text-sm
               font-normal
-              text-gray-700
+              text-slate-800
               bg-transparent bg-clip-padding bg-no-repeat
               border-b-2 border-solid border-gray-300
               rounded
               transition
               ease-in-out
               m-0
-              focus:text-gray-700 focus:bg-white focus:border-indigo-400 focus:outline-none" aria-label="Default select example">
-                <option selected>Has Central Air Condition?</option>
+              focus:text-slate-700 focus:bg-white focus:border-indigo-400 focus:outline-none custom__select" aria-label="Default select example" required>
+                <option selected value="">Has Central Air Condition?</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
         </div>
         <div class="mb-3 mt-5">
-            <select class="form-select appearance-none
+            <select id="overall_quality" class="form-select appearance-none
               block
               w-full
-              px-3
               py-2.5
               text-sm
               font-normal
-              text-gray-700
+              text-slate-800
               bg-transparent bg-clip-padding bg-no-repeat
               border-b-2 border-solid border-gray-300
               rounded
               transition
               ease-in-out
               m-0
-              focus:text-gray-700 focus:bg-white focus:border-indigo-400 focus:outline-none" aria-label="Default select example">
-                <option selected>Overall Material & Finish Quality</option>
+              focus:text-slate-700 focus:bg-white focus:border-indigo-400 focus:outline-none custom__select" aria-label="Default select example" required>
+                <option selected value="">Overall Material & Finish Quality</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -130,8 +119,11 @@
     </div>
 
     <div class="flex justify-center mt-7 mb-5">
-        <button class="rounded text-slate-200 bg-indigo-500 cursor-pointer border-0 outline-none hover:shadow-lg px-16 py-2.5 transition-0.3s duration-300 ease-in-out ripple__button">
-            Predict
+        <button type="submit" id="submit__button" class="flex items-center gap-x-2 rounded font-medium text-slate-200 bg-indigo-500 cursor-pointer border-0 outline-none hover:shadow-lg px-16 py-2.5 transition-0.3s duration-300 ease-in-out ripple__button">
+            Predict 
+                <div id="button__loader" class="hidden">
+                    <span class="iconify text-base" data-icon="icomoon-free:spinner9"></span>
+                </div>
         </button>
     </div>
 </form>
