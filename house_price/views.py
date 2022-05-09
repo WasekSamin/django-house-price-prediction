@@ -3,7 +3,8 @@ from django.views import View
 from django.http import JsonResponse
 import pickle
 import numpy as np
-# Create your views here.
+import os
+
 
 class HomeView(View):
     def get(self, request):
@@ -31,7 +32,9 @@ class HousePricePredict(View):
             total_bathrooms is not None or total_kitchens is not None or total_fireplaces is not None or \
             garage_area is not None or car_capacity is not None or basement_area is not None or \
             pool_area is not None or central_air is not None or overall_qual is not None:
-            model = pickle.load(open(r"./house_price/house_prediction_model.pkl", "rb"))
+            # Loading the linear regression model
+            model_directory = f"{os.getcwd()}/house_price"
+            model = pickle.load(open(f"{model_directory}/house_prediction_model.pkl", "rb"))
 
             # For HouseStyle
             # 1Story = 2
